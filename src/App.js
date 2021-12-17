@@ -20,7 +20,7 @@ export class App extends Component {
     this.setState({
       contract: new this.web3.eth.Contract(
         Post.abi,
-        "0xaEe977964892acc600452aE6F7bF160a9c20423F"
+        "0xAA99c3fA31627Fc1A0c9C8036331780B46832AE0"
       ),
     });
 
@@ -32,22 +32,23 @@ export class App extends Component {
       account: accounts[0],
     });
 
-    console.log(this.state.contract.methods.value().call());
+    let value = await this.state.contract.methods.getValue().call();
+
+    console.log(value);
   }
 
-  async increase() {
-    this.state.contract.methods
-      .increase("0xaEe977964892acc600452aE6F7bF160a9c20423F")
-      .send({
-        from: this.state.account,
-      });
+  async sumar() {
+    this.state.contract.methods.increase().send({
+      from: this.state.account,
+      gas: 0,
+    });
   }
 
   render() {
     return (
       <>
         <p>{this.state.account}</p>
-        <button onClick={this.increase.bind(this)}>Sumar 1</button>
+        <button onClick={this.sumar.bind(this)}>Sumar 1</button>
       </>
     );
   }

@@ -52,6 +52,24 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: true,
     },
+    rinkeby: {
+      provider: function () {
+        return new HDWalletProvider(
+          mnemonic,
+          "https://rinkeby.infura.io/v3/352e7031f6ee488fb33bb74ff1e1d2ff"
+        );
+      },
+      network_id: 4,
+      gas: 4500000,
+      gasPrice: 10000000000,
+    },
+    bsc: {
+      provider: () => new HDWalletProvider(mnemonic, `https://bsc-dataseed1.binance.org`),
+      network_id: 56,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
